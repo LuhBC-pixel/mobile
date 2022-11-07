@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { Heading, Text, VStack, useToast } from 'native-base';
-import { Header } from '../components/Header';
-
-import Logo from '../assets/logo.svg';
-import { Input } from '../components/Input';
-import { Button } from '../components/Button';
 import { api } from '../services/api';
+import { Button } from '../components/Button';
+import { Header } from '../components/Header';
+import { Input } from '../components/Input';
+import Logo from '../assets/logo.svg';
 
 export function New() {
   const [title, setTitle] = useState('');
@@ -16,7 +15,7 @@ export function New() {
   async function handlePoolCreate() {
     if (!title.trim()) {
       return toast.show({
-        title: 'Informe um nome para o seu bolão',
+        title: 'Informer um nome para o seu bolão',
         placement: 'top',
         bgColor: 'red.500',
       });
@@ -25,7 +24,7 @@ export function New() {
     try {
       setIsLoading(true);
 
-      await api.post('/pools', { title });
+      await api.post('/pools', { title: title.toUpperCase() });
 
       toast.show({
         title: 'Bolão criado com sucesso!',
@@ -36,7 +35,6 @@ export function New() {
       setTitle('');
     } catch (error) {
       console.log(error);
-
       toast.show({
         title: 'Não foi possível criar o bolão',
         placement: 'top',
@@ -48,7 +46,7 @@ export function New() {
   }
 
   return (
-    <VStack flex={1} bgColor='gray.900'>
+    <VStack flex={1} bg='gray.900'>
       <Header title='Criar novo bolão' />
 
       <VStack mt={8} mx={5} alignItems='center'>
@@ -61,14 +59,14 @@ export function New() {
           my={8}
           textAlign='center'
         >
-          Crie seu próprio bolão da copa {'\n'} e compartilhe entre amigos!
+          Crie seu próprio bolão da copa{'\n'}e compartilhe entre amigos!
         </Heading>
 
         <Input
           mb={2}
-          placeholder='Qual nome do seu bolão?'
-          value={title}
+          placeholder='Qual o nome do seu bolão?'
           onChangeText={setTitle}
+          value={title}
         />
 
         <Button

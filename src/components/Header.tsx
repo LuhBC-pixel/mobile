@@ -1,6 +1,6 @@
-import { useNavigation } from '@react-navigation/native';
 import { Text, HStack, Box } from 'native-base';
 import { CaretLeft, Export } from 'phosphor-react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { ButtonIcon } from './ButtonIcon';
 
@@ -8,12 +8,14 @@ interface Props {
   title: string;
   showBackButton?: boolean;
   showShareButton?: boolean;
+  onShare?: () => void;
 }
 
 export function Header({
   title,
   showBackButton = false,
   showShareButton = false,
+  onShare,
 }: Props) {
   const { navigate } = useNavigation();
 
@@ -44,7 +46,11 @@ export function Header({
           {title}
         </Text>
 
-        {showShareButton ? <ButtonIcon icon={Export} /> : <EmptyBoxSpace />}
+        {showShareButton ? (
+          <ButtonIcon icon={Export} onPress={onShare} />
+        ) : (
+          <EmptyBoxSpace />
+        )}
       </HStack>
     </HStack>
   );

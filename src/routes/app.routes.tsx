@@ -1,7 +1,8 @@
 import { Platform } from 'react-native';
-import { useTheme } from 'native-base';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { PlusCircle, SoccerBall } from 'phosphor-react-native';
+import { useTheme } from 'native-base';
+
 import { New } from '../screens/New';
 import { Pools } from '../screens/Pools';
 import { Find } from '../screens/Find';
